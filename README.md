@@ -4,6 +4,52 @@
 
 - Home <https://github.com/zeupin/dida-config>
 
+## API
+
+- `has($key)` -- 检查是否有指定 key 的配置。
+- `set($key, $value)` -- 设置一个配置项。
+- `get($key, $default = null)` -- 获取指定配置项，如果配置项不存在，返回 default 值。
+- `remove($key)` -- 删除一个配置项。
+- `keys()` -- 获取所有配置项的 keys。
+- `sortKeys()` -- 对配置项按 key 排序。
+- `clear()` -- 删除所有配置项。
+- `merge(array $confs)` -- 批量合并一个配置项数组。
+- `getKeysByGroup($group)` -- 获取指定 group 的所有 keys。
+- `getItemsByGroup($group)` -- 获取指定 group 的所有配置项。
+- `groupExpand($group, array $items)` --将给出的 items 扩展到指定的 group 上。
+- `groupPack($group)` -- 对给出的 group 进行压缩，返回压缩后的配置数组。
+- `groupClear($group)` -- 删除指定 group 的所有配置项。
+- `load($filepath, $group = null)` -- 从文件中载入配置。
+
+## 说明
+
+1. 一个load()可以读取的配置文件如下：
+```php
+<?php
+return [
+
+];
+```
+
+1. `groupExpand()` 和 `groupPack()` 是逆过程：
+
+   ```php
+   $confA = [""=>0, "a"=>1, "b"=>2, "c"=>3];
+
+   Config::groupExpand("db", $confA);
+
+   // Config::$items = [
+   //   "db" => 0,
+   //   "db.a" => 1,
+   //   "db.b" => 2,
+   //   "db.c" => 3,
+   // ]
+
+   $confB = Config::groupPack("db");
+
+   // $confB = [""=>0, "a"=>1, "b"=>2, "c"=>3]
+   ```
+
 ## 作者
 
 - [Macc Liu](https://github.com/maccliu)，欢迎互动探讨。
