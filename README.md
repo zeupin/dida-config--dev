@@ -52,7 +52,7 @@
 
    $confB = ["a"=>9, "c"=>3];
 
-   Config::merge($confA);
+   Config::merge($confB);
 
    // 运行后，结果如下：
    // Config::$items = [
